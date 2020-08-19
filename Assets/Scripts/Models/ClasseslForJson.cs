@@ -90,18 +90,18 @@ public class SetForJson
 [Serializable]
 public class SetsForJson
 {
-    private int _NextSetId = 1;
+    //private int _NextSetId = 1;
  
     public List<SetForJson> sets = new List<SetForJson>();
 
     public bool AddSet(List<GameObject> spheresList)
     {
-        if (_NextSetId <= 15)
+        if (sets.Count < 15)
         {
-            SetForJson setForJson = new SetForJson(spheresList, _NextSetId.ToString());
+            SetForJson setForJson = new SetForJson(spheresList, (sets.Count + 1).ToString());
             sets.Add(setForJson);
 
-            _NextSetId++;
+            //_NextSetId++;
 
             return true;
         }

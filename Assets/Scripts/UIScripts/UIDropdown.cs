@@ -18,6 +18,11 @@ public class UIDropdown : MonoBehaviour
 
     private void UpdateList(List<int> ids)
     {
-        
+        _Dropdown.options.Clear();
+
+        foreach (var id in ids)
+        {
+            _Dropdown.options.Add(new Dropdown.OptionData(id.ToString()));
+        }
     }
 }

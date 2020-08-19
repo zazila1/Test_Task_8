@@ -24,13 +24,17 @@ public class JsonSerializationController : MonoBehaviour
 
         _SphereSets = JsonUtility.FromJson<SetsForJson>(jsonString);
         
+        OnSetsUpdate?.Invoke(_SphereSets.GetIdList());
+        
         Debug.Log(_SphereSets);
     }
 
     public void AddSet(List<GameObject> spheres)
     {
         _SphereSets.AddSet(spheres);
+        
         OnSetsUpdate?.Invoke(_SphereSets.GetIdList());
+        
         SaveToFile();
     }
 
