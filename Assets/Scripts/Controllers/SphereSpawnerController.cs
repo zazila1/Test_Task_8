@@ -1,6 +1,7 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SphereSpawnerController : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class SphereSpawnerController : MonoBehaviour
     
     
     List<GameObject> _SpheresInScene = new List<GameObject>();
+
+    private void Start()
+    {
+        _SerializationController.LoadFromFile();
+    }
 
     public void GenerateSpheres()
     {
@@ -30,32 +36,11 @@ public class SphereSpawnerController : MonoBehaviour
         ClearSpheres();
         foreach (var sphereParam in sphereParams)
         {
-            // Vector3 randomPosition = new Vector3(Random.Range(-10f, 10f), Random.Range(-3f, 5f),Random.Range(-10f, 10f));
-            // float randomScale = Random.Range(0.1f, 1.5f);
-            
             var sphere = _Pool.Spawn(sphereParam.Item1, transform);
             sphere.transform.localScale = Vector3.one * sphereParam.Item2;
             
             _SpheresInScene.Add(sphere);
         }
-        
-        
-        // SphereModelForJson x = new SphereModelForJson(spheresInScene[0]);
-        // x.id = "1";
-        // x.scale = SphereModelForJson.FloatToString(0.2f);
-        // x.wordPosition = new WordPositionForJson(new Vector3(1.5f, 2, 3));
-        //
-        // SetsForJson setsForJson = new SetsForJson();
-        // setsForJson.AddSet(spheresInScene);
-        // setsForJson.AddSet(spheresInScene);
-        
-        // Debug.Log(JsonUtility.ToJson(x));
-        // Debug.Log(SphereModelForJson.StringToFloat("2.4f"));
-        // Debug.Log(JsonUtility.ToJson(setsForJson));
-        
-        // _SerializationController.AddSet(_SpheresInScene);
-        // _SerializationController.AddSet(_SpheresInScene);
-        // _SerializationController.SaveToFile();
     }
 
     public void ClearSpheres()

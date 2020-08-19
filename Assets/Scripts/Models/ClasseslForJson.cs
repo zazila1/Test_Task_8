@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using UnityEditor;
 using UnityEngine;
 
 [Serializable]
@@ -15,19 +14,6 @@ public class SphereModelForJson
     {
         wordPosition = new WordPositionForJson(sphereGameObject.transform.position);
         scale = FloatToString(sphereGameObject.transform.localScale.x);
-    }
-
-    public void SetupObjectWithModel(GameObject sphere)
-    {
-        sphere.transform.localScale = Vector3.one * StringToFloat(scale);
-        Vector3 position = new Vector3()
-        {
-            x = StringToFloat(wordPosition.x),
-            y = StringToFloat(wordPosition.y),
-            z = StringToFloat(wordPosition.z),
-        };
-
-        sphere.transform.position = position;
     }
     
     public static string FloatToString(float f)
@@ -103,24 +89,7 @@ public class SetsForJson
             return false;
         }
     }
-
-    public bool GetSetById(int id, ref List<GameObject> gameObjects)
-    {
-        foreach (var set in sets)
-        {
-            if (set.GetId() == id)
-            {
-                for (int i = 0; i < set.spheres.Count; i++)
-                {
-                    set.spheres[i].SetupObjectWithModel(gameObjects[i]);
-                }
-
-                return true;
-            }
-        }
-        return false;
-    }
-
+    
     public List<int> GetIdList()
     {
         List<int> idList = new List<int>();
@@ -131,5 +100,4 @@ public class SetsForJson
 
         return idList;
     }
-    // (_Id++).ToString(CultureInfo.InvariantCulture);
 }
