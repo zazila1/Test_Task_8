@@ -8,21 +8,18 @@ public class JsonSerializationController : MonoBehaviour
     private SetsForJson _SphereSets = new SetsForJson();
 
     private string _FilePath = "json.txt";
-    public void SaveToFile()
+    private void SaveToFile()
     {
         File.WriteAllText(_FilePath, JsonUtility.ToJson(_SphereSets));
-
-        LoadFromFile();
     }
 
     public void LoadFromFile()
     {
-        SetsForJson setsForJson = new SetsForJson();
         string jsonString = File.ReadAllText(_FilePath);
 
-        var x = JsonUtility.FromJson<SetsForJson>(jsonString);
+        _SphereSets = JsonUtility.FromJson<SetsForJson>(jsonString);
         
-        Debug.Log(x);
+        Debug.Log(_SphereSets);
     }
 
     public void AddSet(List<GameObject> spheres)

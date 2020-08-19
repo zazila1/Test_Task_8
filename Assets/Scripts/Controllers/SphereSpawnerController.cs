@@ -9,9 +9,10 @@ public class SphereSpawnerController : MonoBehaviour
     [SerializeField] private int _SpheresCount = 10;
     
     
+    List<GameObject> _SpheresInScene = new List<GameObject>();
+    
     public void GenerateSpheres()
     {
-        List<GameObject> spheres = new List<GameObject>();
         
         for (int i = 0; i < _SpheresCount; i++)
         {
@@ -21,30 +22,36 @@ public class SphereSpawnerController : MonoBehaviour
             var sphere = _Pool.Spawn(randomPosition, transform);
             sphere.transform.localScale = Vector3.one * randomScale;
             
-            spheres.Add(sphere);
+            _SpheresInScene.Add(sphere);
         }
         
         
-        SphereModelForJson x = new SphereModelForJson(spheres[0]);
-        x.id = "1";
-        x.scale = SphereModelForJson.FloatToString(0.2f);
-        x.wordPosition = new WordPositionForJson(new Vector3(1.5f, 2, 3));
+        // SphereModelForJson x = new SphereModelForJson(spheresInScene[0]);
+        // x.id = "1";
+        // x.scale = SphereModelForJson.FloatToString(0.2f);
+        // x.wordPosition = new WordPositionForJson(new Vector3(1.5f, 2, 3));
+        //
+        // SetsForJson setsForJson = new SetsForJson();
+        // setsForJson.AddSet(spheresInScene);
+        // setsForJson.AddSet(spheresInScene);
         
-        SetsForJson setsForJson = new SetsForJson();
-        setsForJson.AddSet(spheres);
-        setsForJson.AddSet(spheres);
+        // Debug.Log(JsonUtility.ToJson(x));
+        // Debug.Log(SphereModelForJson.StringToFloat("2.4f"));
+        // Debug.Log(JsonUtility.ToJson(setsForJson));
         
-        Debug.Log(JsonUtility.ToJson(x));
-        Debug.Log(SphereModelForJson.StringToFloat("2.4f"));
-        Debug.Log(JsonUtility.ToJson(setsForJson));
-        
-        _SerializationController.AddSet(spheres);
-        _SerializationController.AddSet(spheres);
-        _SerializationController.SaveToFile();
+        // _SerializationController.AddSet(_SpheresInScene);
+        // _SerializationController.AddSet(_SpheresInScene);
+        // _SerializationController.SaveToFile();
     }
 
     public void ClearSpheres()
     {
         _Pool.RemoveAll();
+        _SpheresInScene.Clear();
+    }
+
+    public void SaveCurrentSet()
+    {
+        _SerializationController.AddSet(_SpheresInScene);
     }
 }
