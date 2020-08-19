@@ -10,17 +10,31 @@ public class SphereSpawnerController : MonoBehaviour
     
     
     List<GameObject> _SpheresInScene = new List<GameObject>();
-    
+
     public void GenerateSpheres()
     {
-        ClearSpheres();
+        List<(Vector3, float)> sphereParams = new List<(Vector3, float)>();
         for (int i = 0; i < _SpheresCount; i++)
         {
             Vector3 randomPosition = new Vector3(Random.Range(-10f, 10f), Random.Range(-3f, 5f),Random.Range(-10f, 10f));
             float randomScale = Random.Range(0.1f, 1.5f);
             
-            var sphere = _Pool.Spawn(randomPosition, transform);
-            sphere.transform.localScale = Vector3.one * randomScale;
+            sphereParams.Add((randomPosition, randomScale));
+        }
+        
+        SpawnSpheres(sphereParams);
+    }
+    
+    public void SpawnSpheres(List<(Vector3, float)> sphereParams)
+    {
+        ClearSpheres();
+        foreach (var sphereParam in sphereParams)
+        {
+            // Vector3 randomPosition = new Vector3(Random.Range(-10f, 10f), Random.Range(-3f, 5f),Random.Range(-10f, 10f));
+            // float randomScale = Random.Range(0.1f, 1.5f);
+            
+            var sphere = _Pool.Spawn(sphereParam.Item1, transform);
+            sphere.transform.localScale = Vector3.one * sphereParam.Item2;
             
             _SpheresInScene.Add(sphere);
         }

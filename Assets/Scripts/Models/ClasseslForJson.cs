@@ -60,8 +60,6 @@ public struct WordPositionForJson
 [Serializable]
 public class SetForJson
 {
-    //private static int _Id = 1;
-    
     public string set;
     public List<SphereModelForJson> spheres = new List<SphereModelForJson>();
 
@@ -79,7 +77,6 @@ public class SetForJson
             spheres.Add(sphereForJson);
             sphereId++;
         }
-        // _Id++;
     }
 
     public int GetId()
@@ -90,8 +87,6 @@ public class SetForJson
 [Serializable]
 public class SetsForJson
 {
-    //private int _NextSetId = 1;
- 
     public List<SetForJson> sets = new List<SetForJson>();
 
     public bool AddSet(List<GameObject> spheresList)
@@ -100,8 +95,6 @@ public class SetsForJson
         {
             SetForJson setForJson = new SetForJson(spheresList, (sets.Count + 1).ToString());
             sets.Add(setForJson);
-
-            //_NextSetId++;
 
             return true;
         }

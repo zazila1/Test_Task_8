@@ -14,6 +14,8 @@ public class UIDropdown : MonoBehaviour
     void Start()
     {
         _JsonSerializationController.OnSetsUpdate += UpdateList;
+        
+        //_Dropdown.onValueChanged.AddListener(S);
     }
 
     private void UpdateList(List<int> ids)
@@ -25,4 +27,6 @@ public class UIDropdown : MonoBehaviour
             _Dropdown.options.Add(new Dropdown.OptionData(id.ToString()));
         }
     }
+    
+    
 }
