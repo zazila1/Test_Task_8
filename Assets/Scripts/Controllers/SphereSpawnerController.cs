@@ -7,14 +7,14 @@ public class SphereSpawnerController : MonoBehaviour
 {
     [SerializeField] private JsonSerializationController _SerializationController;
     [SerializeField] private SpherePoolController _Pool;
-    [SerializeField] private int _SpheresCount = 10;
-    
+    private int _SpheresCount = 10;
+    private float screenBordersOffset = 0.1f; // 10%
     
     List<GameObject> _SpheresInScene = new List<GameObject>();
 
     private void Start()
     {
-        _SerializationController.LoadFromFile();
+        
     }
 
     public void GenerateSpheres()
@@ -22,7 +22,12 @@ public class SphereSpawnerController : MonoBehaviour
         List<(Vector3, float)> sphereParams = new List<(Vector3, float)>();
         for (int i = 0; i < _SpheresCount; i++)
         {
-            Vector3 randomPosition = new Vector3(Random.Range(-10f, 10f), Random.Range(-3f, 5f),Random.Range(-10f, 10f));
+            Camera camera = Camera.main;
+
+            Vector3 randomCamPosition = new Vector3(Random.Range(Screen.width * screenBordersOffset, Screen.width * (1-screenBordersOffset)), 
+                                                    Random.Range(Screen.height * screenBordersOffset, Screen.height * (1-screenBordersOffset)), 
+                                                    Random.Range(camera.farClipPlane * screenBordersOffset, camera.farClipPlane * (1-screenBordersOffset)));
+            Vector3 randomPosition = camera.ScreenToWorldPoint(randomCamPosition);
             float randomScale = Random.Range(0.1f, 1.5f);
             
             sphereParams.Add((randomPosition, randomScale));

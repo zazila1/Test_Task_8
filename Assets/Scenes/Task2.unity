@@ -923,7 +923,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -1893,7 +1893,9 @@ MonoBehaviour:
   m_ItemImage: {fileID: 0}
   m_Value: 0
   m_Options:
-    m_Options: []
+    m_Options:
+    - m_Text: Choose..
+      m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1948,6 +1950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Dropdown: {fileID: 1435226618}
+  _DropdownEmptyText: {fileID: 2055596547}
   _JsonSerializationController: {fileID: 2104323532}
   _SphereSpawnerController: {fileID: 2104323530}
 --- !u!1 &1456027258
@@ -2410,7 +2413,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: Choose..
 --- !u!222 &2055596548
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2451,7 +2454,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _SerializationController: {fileID: 2104323532}
   _Pool: {fileID: 1579222492}
-  _SpheresCount: 10
 --- !u!4 &2104323531
 Transform:
   m_ObjectHideFlags: 0

@@ -5,13 +5,18 @@ using UnityEngine;
 
 public class JsonSerializationController : MonoBehaviour
 {
-    private SetsForJson _SphereSets = new SetsForJson();
-
+    private SetsForJson _SphereSets;
     private string _FilePath = "json.txt";
 
     public delegate void SetsUpdates(List<int> ids);
     public event SetsUpdates OnSetsUpdate;
-        
+
+    private void Start()
+    {
+        _SphereSets = new SetsForJson();
+        LoadFromFile();
+    }
+
     private void SaveToFile()
     {
         File.WriteAllText(_FilePath, JsonUtility.ToJson(_SphereSets));
